@@ -2,7 +2,7 @@ name: Ti-Claude Notification
 
 on:
   schedule:
-    - cron: '35 15 * * *'  # 11h35 AM EDT (UTC-4)
+    - cron: '45 15 * * *'  # 11h45 AM EDT (UTC-4)
   workflow_dispatch:        # Permet de déclencher manuellement pour tester
 
 jobs:
