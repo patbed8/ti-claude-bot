@@ -32,7 +32,7 @@ def check_recent_actualite():
     for msg in data.get("messages", []):
         text = msg.get("text", "")
         print(f"  → {text[:80]}")
-        if "🗞️ Actualité" in text:
+        if "Actualit" in text:
             print("Actualité détectée — envoi notification.")
             return True
 
