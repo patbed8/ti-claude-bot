@@ -1,0 +1,25 @@
+name: Ti-Claude Notification
+
+on:
+  schedule:
+    - cron: '35 15 * * *'  # 11h35 AM EDT (UTC-4)
+  workflow_dispatch:        # Permet de déclencher manuellement pour tester
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installer les dépendances
+        run: pip install requests
+
+      - name: Vérifier et notifier
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python notify.py
