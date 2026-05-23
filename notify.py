@@ -5,24 +5,26 @@ import requests
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 SLACK_WEBHOOK_URL = os.environ["SLACK_WEBHOOK_URL"]
 CHANNEL_ID = "C0B5SV0GVC0"  # #actu
-LOOKBACK_SECONDS = 40 * 60   # 40 minutes pour être safe
+LOOKBACK_SECONDS = 40 * 60   # 40 minutes
 
 def check_recent_actualite():
     oldest = str(time.time() - LOOKBACK_SECONDS)
+    print(f"Recherche des messages depuis : {oldest} (maintenant : {time.time()})")
+
     response = requests.get(
         "https://slack.com/api/conversations.history",
         headers={"Authorization": f"Bearer {SLACK_BOT_TOKEN}"},
         params={"channel": CHANNEL_ID, "oldest": oldest, "limit": 20}
     )
     data = response.json()
-
-    if not data.get("ok"):
-        print(f"Erreur Slack API : {data.get('error')}")
-        return False
+    print(f"Réponse API Slack : ok={data.get('ok')}, error={data.get('error', 'aucune')}")
+    print(f"Nombre de messages trouvés : {len(data.get('messages', []))}")
 
     messages = data.get("messages", [])
     for msg in messages:
-        if "🗞️ Actualité" in msg.get("text", ""):
+        text = msg.get("text", "")
+        print(f"  → Message : {text[:80]}...")
+        if "🗞️ Actualité" in text:
             print("Message d'actualité trouvé — envoi de la notification.")
             return True
 
