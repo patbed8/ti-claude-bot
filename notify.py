@@ -50,7 +50,7 @@ def check_recent_actualite():
             print(f"Message : {notification}")
             return notification
 
-    print("Aucune actualité trouvée dans les 40 dernières minutes.")
+    print("Aucune actualité trouvée dans les 2 dernières heures.")
     return None
 
 def send_notification(message):
