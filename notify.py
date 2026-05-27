@@ -5,7 +5,7 @@ import requests
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 SLACK_WEBHOOK_URL = os.environ["SLACK_WEBHOOK_URL"]
 CHANNEL_ID = "C0B5SV0GVC0"  # #actu
-LOOKBACK_SECONDS = 40 * 60   # 40 minutes
+LOOKBACK_SECONDS = 120 * 60   # 2 heures
 
 def join_channel():
     requests.post(
