@@ -5,7 +5,7 @@ import requests
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 SLACK_WEBHOOK_URL = os.environ["SLACK_WEBHOOK_URL"]
 CHANNEL_ID = "C0B5SV0GVC0"  # #actu
-LOOKBACK_SECONDS = 120 * 60   # 2 heures
+LOOKBACK_SECONDS = 6 * 60 * 60   # 6 heures
 
 def join_channel():
     requests.post(
@@ -50,7 +50,7 @@ def check_recent_actualite():
             print(f"Message : {notification}")
             return notification
 
-    print("Aucune actualité trouvée dans les 2 dernières heures.")
+    print("Aucune actualité trouvée dans les 6 dernières heures.")
     return None
 
 def send_notification(message):
